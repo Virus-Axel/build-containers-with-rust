@@ -13,9 +13,12 @@ RUN dnf -y install --setopt=install_weak_deps=False \
     #CLANG_VERSION=14.0.6 ENABLE_CLANG_INSTALL=1 INSTALLPREFIX=/usr ./build_clang.sh && \
     ./build.sh && \
     ./build_compiler_rt.sh && \
-    rm -rf /root/osxcross/build
+    rm -rf /root/osxcross/build && \
+    rustup target add aarch64-apple-darwin && \
+    rustup target add x86_64-apple-darwin
 
 ENV OSXCROSS_ROOT=/root/osxcross
 ENV PATH="/root/osxcross/target/bin:${PATH}"
+ENV CC=aarch64-apple-darwin22-clang
 
 CMD /bin/bash

@@ -4,6 +4,8 @@ FROM godot-fedora:${img_version}
 ENV ANDROID_SDK_ROOT=/root/sdk
 ENV ANDROID_NDK_VERSION=23.2.8568313
 ENV ANDROID_NDK_ROOT=${ANDROID_SDK_ROOT}/ndk/${ANDROID_NDK_VERSION}
+ENV PATH=${PATH}:${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/linux-x86_64/bin
+ENV AR_aarch64_linux_android=llvm-ar
 
 RUN dnf -y install --setopt=install_weak_deps=False \
       java-11-openjdk-devel ncurses-compat-libs && \
@@ -13,6 +15,8 @@ RUN dnf -y install --setopt=install_weak_deps=False \
     unzip ${CMDLINETOOLS} && \
     rm ${CMDLINETOOLS} && \
     yes | cmdline-tools/bin/sdkmanager --sdk_root="${ANDROID_SDK_ROOT}" --licenses && \
-    cmdline-tools/bin/sdkmanager --sdk_root="${ANDROID_SDK_ROOT}" "ndk;${ANDROID_NDK_VERSION}" 'cmdline-tools;latest' 'build-tools;32.0.0' 'platforms;android-32' 'cmake;3.18.1'
+    cmdline-tools/bin/sdkmanager --sdk_root="${ANDROID_SDK_ROOT}" "ndk;${ANDROID_NDK_VERSION}" 'cmdline-tools;latest' 'build-tools;32.0.0' 'platforms;android-32' 'cmake;3.18.1' && \
+    yum install gcc -y && \
+    rustup target add aarch64-linux-android
 
 CMD /bin/bash

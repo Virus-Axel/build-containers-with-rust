@@ -8,6 +8,9 @@ ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 RUN dnf -y install --setopt=install_weak_deps=False \
       bash bzip2 curl file findutils git make nano patch pkgconfig python3-pip unzip which xz \
       dotnet-sdk-6.0 && \
-    pip install scons==4.4.0
+    pip install scons==4.4.0 && \
+    curl https://sh.rustup.rs -sSf | sh -s -- -y
+
+ENV PATH="/root/.cargo/bin:${PATH}"
 
 CMD /bin/bash

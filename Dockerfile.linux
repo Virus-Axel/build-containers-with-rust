@@ -27,6 +27,8 @@ RUN dnf -y install --setopt=install_weak_deps=False \
     rm -f i686-godot-linux-gnu_sdk-buildroot.tar.bz2 && \
     cd i686-godot-linux-gnu_sdk-buildroot && \
     ./relocate-sdk.sh && \
+    yum install gcc g++ -y && \
+    rustup target add x86_64-unknown-linux-gnu && \
     rm -f bin/{aclocal*,auto*,libtool*,m4}
 
 CMD /bin/bash
