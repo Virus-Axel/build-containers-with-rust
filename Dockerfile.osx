@@ -19,6 +19,6 @@ RUN dnf -y install --setopt=install_weak_deps=False \
 
 ENV OSXCROSS_ROOT=/root/osxcross
 ENV PATH="/root/osxcross/target/bin:${PATH}"
-ENV CC=aarch64-apple-darwin22-clang
+ENV CC_aarch64_apple_darwin=aarch64-apple-darwin22-clang
 
 CMD /bin/bash
