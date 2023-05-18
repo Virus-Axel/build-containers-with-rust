@@ -16,7 +16,7 @@ RUN dnf -y install --setopt=install_weak_deps=False \
     rm ${CMDLINETOOLS} && \
     yes | cmdline-tools/bin/sdkmanager --sdk_root="${ANDROID_SDK_ROOT}" --licenses && \
     cmdline-tools/bin/sdkmanager --sdk_root="${ANDROID_SDK_ROOT}" "ndk;${ANDROID_NDK_VERSION}" 'cmdline-tools;latest' 'build-tools;32.0.0' 'platforms;android-32' 'cmake;3.18.1' && \
-    yum install gcc -y && \
+    dnf install gcc -y && \
     rustup target add aarch64-linux-android
 
 CMD /bin/bash
