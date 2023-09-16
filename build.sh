@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 basedir=$(cd $(dirname "$0"); pwd)
 
@@ -52,8 +52,6 @@ podman_build() {
     -f Dockerfile."$1" . \
     2>&1 | tee logs/"$1".log
 }
-
-podman_build export
 
 podman_build linux
 podman_build windows
